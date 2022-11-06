@@ -1,6 +1,5 @@
 import morphdom from "morphdom";
-
-export type Filter = (a: HTMLAnchorElement) => boolean;
+import type { Filter, Hooks } from "./types";
 
 export function check({ href, target, host }: HTMLAnchorElement) {
   return (
@@ -14,12 +13,18 @@ var filter: Filter = check;
 
 var request: RequestInit | undefined;
 
+var options: Hooks | undefined;
+
 export function useFilter(f: Filter) {
   filter = f;
 }
 
 export function useRequest(init?: RequestInit | undefined) {
   request = init;
+}
+
+export function useHooks(hooks: Hooks) {
+  options = hooks;
 }
 
 export function goto(href: string, push = true) {
@@ -40,7 +45,7 @@ export function goto(href: string, push = true) {
       const body = box.querySelector("body");
 
       head && morphdom(document.head, head);
-      body && morphdom(document.body, body);
+      body && morphdom(document.body, body, options);
 
       mtos();
     });
