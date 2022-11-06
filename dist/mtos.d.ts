@@ -20,15 +20,20 @@ declare type Filter = (a: HTMLAnchorElement) => boolean;
 declare type ScrollOptions = {
     enable?: boolean;
 } & ScrollToOptions;
-declare type Config = Hooks & {
-    filter?: Filter;
-    fetch?: RequestInit;
+declare type GotoOptions = {
+    pushState?: boolean;
     scroll?: ScrollOptions;
 };
+declare type ResolvedConfig = Hooks & {
+    filter: Filter;
+    fetch?: RequestInit;
+    scroll: ScrollOptions;
+};
+declare type Config = Partial<ResolvedConfig>;
 
 declare function check({ href, target, host }: HTMLAnchorElement): boolean;
 declare function setup(userConfig: Config): void;
-declare function goto(href: string, push?: boolean): boolean;
+declare function goto(href: string, options?: GotoOptions): boolean;
 declare function mtos(): void;
 
 export { check, goto, mtos, setup };

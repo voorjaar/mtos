@@ -752,37 +752,46 @@ function morphdomFactory(morphAttrs) {
 
 var morphdom = morphdomFactory(morphAttrs);
 
-var config = {
-    filter: check,
+const defaultScrollOptions = {
+    enable: true,
+    top: 0,
+    left: 0,
+    behavior: "smooth",
 };
+const scrollPositions = [];
+const defaultConfig = {
+    filter: check,
+    scroll: defaultScrollOptions,
+};
+var config = defaultConfig;
 function check({ href, target, host }) {
     return (host === window.location.host &&
         href.split("#")[0] !== window.location.href.split("#")[0] &&
         (target === "" || target === "_self"));
 }
 function setup(userConfig) {
-    config = userConfig;
+    config = Object.assign(Object.assign({}, defaultConfig), userConfig);
 }
-function goto(href, push = true) {
+function goto(href, options = {}) {
     fetch(href, config.fetch)
         .then((response) => response.text())
         .then((html) => {
         var _a;
         const box = document.createElement("html");
         box.innerHTML = html;
-        if (push)
+        if (options.pushState !== false) {
+            scrollPositions.push({
+                top: document.body.scrollTop,
+                left: document.body.scrollLeft,
+            });
             history.pushState({}, ((_a = document.head.querySelector("title")) === null || _a === void 0 ? void 0 : _a.innerText) || "Document", href);
+        }
         const head = box.querySelector("head");
         const body = box.querySelector("body");
-        const scrollOptions = config.scroll || {
-            enable: true,
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-        };
-        (scrollOptions === null || scrollOptions === void 0 ? void 0 : scrollOptions.enable) && window.scrollTo(scrollOptions);
         head && morphdom(document.head, head);
         body && morphdom(document.body, body, config);
+        const scrollOptions = options.scroll || config.scroll;
+        (scrollOptions === null || scrollOptions === void 0 ? void 0 : scrollOptions.enable) && window.scrollTo(scrollOptions);
         mtos();
     });
     return false;
@@ -802,9 +811,11 @@ function mtos() {
     });
 }
 window.addEventListener("load", mtos);
-window.addEventListener("popstate", (event) => {
-    //   console.log(event.state);
-    goto(document.location.href, false);
+window.addEventListener("popstate", () => {
+    goto(document.location.href, {
+        pushState: false,
+        scroll: Object.assign({ enable: true, behavior: "auto" }, (scrollPositions.pop() || { top: 0, left: 0 })),
+    });
 });
 
 export { check, goto, mtos, setup };
