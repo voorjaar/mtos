@@ -752,6 +752,12 @@ function morphdomFactory(morphAttrs) {
 
 var morphdom = morphdomFactory(morphAttrs);
 
+function check({ href, target, host }) {
+    return (host === window.location.host &&
+        href.split("#")[0] !== window.location.href.split("#")[0] &&
+        (target === "" || target === "_self"));
+}
+var filter = check;
 function goto(href, push = true) {
     fetch(href)
         .then((response) => response.text())
@@ -769,17 +775,21 @@ function goto(href, push = true) {
     });
     return false;
 }
+function useFilter(f) {
+    filter = f;
+}
 function mtos() {
     document.querySelectorAll("a").forEach((a) => {
         // a.addEventListener("mouseover", () => {
         // TODO: maybe cache html when hover link
         //   console.log("entered");
         // });
-        a.onclick = () => {
-            //   console.log(old);
-            //   if (old) old();
-            return goto(a.href);
-        };
+        if (filter(a))
+            a.onclick = () => {
+                //   console.log(old);
+                //   if (old) old();
+                return goto(a.href);
+            };
     });
 }
 window.addEventListener("load", mtos);
@@ -788,4 +798,4 @@ window.addEventListener("popstate", (event) => {
     goto(document.location.href, false);
 });
 
-export { goto, mtos };
+export { check, goto, mtos, useFilter };
