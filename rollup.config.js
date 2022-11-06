@@ -6,7 +6,7 @@ import typescript from "rollup-plugin-typescript2";
 import del from "rollup-plugin-delete";
 import { copyFileSync, rmSync } from "fs";
 
-const name = "m2s";
+const name = "mtos";
 
 const input = "src/index.ts";
 
@@ -65,10 +65,10 @@ export default [
           name: "copy-types",
           closeBundle() {
             if (format === "iife") {
-              copyFileSync("./dist/src/index.d.ts", "./dist/m2s.d.ts");
+              copyFileSync("./dist/src/index.d.ts", `./dist/${name}.d.ts`);
               copyFileSync(
-                "./dist/m2s-iife.min.js",
-                "./demo/public/javascripts/m2s.min.js"
+                `./dist/${name}-iife.min.js`,
+                `./demo/public/javascripts/${name}.min.js`
               );
               rmSync("./dist/src", { recursive: true, force: true });
             }
