@@ -7,8 +7,9 @@
   "jsnext:main": "dist/m2s-esm.js",
   "types": "dist/m2s.d.ts",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "demo": "node ./demo/bin/www",
+    "dev": "rollup -cw --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs"
   },
   "keywords": [],
   "author": "",
