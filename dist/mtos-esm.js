@@ -752,25 +752,19 @@ function morphdomFactory(morphAttrs) {
 
 var morphdom = morphdomFactory(morphAttrs);
 
+var config = {
+    filter: check,
+};
 function check({ href, target, host }) {
     return (host === window.location.host &&
         href.split("#")[0] !== window.location.href.split("#")[0] &&
         (target === "" || target === "_self"));
 }
-var filter = check;
-var request;
-var options;
-function useFilter(f) {
-    filter = f;
-}
-function useRequest(init) {
-    request = init;
-}
-function useHooks(hooks) {
-    options = hooks;
+function setup(userConfig) {
+    config = userConfig;
 }
 function goto(href, push = true) {
-    fetch(href, request)
+    fetch(href, config.fetch)
         .then((response) => response.text())
         .then((html) => {
         var _a;
@@ -780,8 +774,15 @@ function goto(href, push = true) {
             history.pushState({}, ((_a = document.head.querySelector("title")) === null || _a === void 0 ? void 0 : _a.innerText) || "Document", href);
         const head = box.querySelector("head");
         const body = box.querySelector("body");
+        const scrollOptions = config.scroll || {
+            enable: true,
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        };
+        (scrollOptions === null || scrollOptions === void 0 ? void 0 : scrollOptions.enable) && window.scrollTo(scrollOptions);
         head && morphdom(document.head, head);
-        body && morphdom(document.body, body, options);
+        body && morphdom(document.body, body, config);
         mtos();
     });
     return false;
@@ -792,7 +793,7 @@ function mtos() {
         // TODO: maybe cache html when hover link
         //   console.log("entered");
         // });
-        if (filter(a))
+        if (config.filter(a))
             a.onclick = () => {
                 //   console.log(old);
                 //   if (old) old();
@@ -806,4 +807,4 @@ window.addEventListener("popstate", (event) => {
     goto(document.location.href, false);
 });
 
-export { check, goto, mtos, useFilter, useHooks, useRequest };
+export { check, goto, mtos, setup };

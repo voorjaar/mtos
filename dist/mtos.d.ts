@@ -17,12 +17,18 @@ interface Hooks {
     onBeforeElChildrenUpdated?: (fromEl: HTMLElement, toEl: HTMLElement) => boolean;
 }
 declare type Filter = (a: HTMLAnchorElement) => boolean;
+declare type ScrollOptions = {
+    enable?: boolean;
+} & ScrollToOptions;
+declare type Config = Hooks & {
+    filter?: Filter;
+    fetch?: RequestInit;
+    scroll?: ScrollOptions;
+};
 
 declare function check({ href, target, host }: HTMLAnchorElement): boolean;
-declare function useFilter(f: Filter): void;
-declare function useRequest(init?: RequestInit | undefined): void;
-declare function useHooks(hooks: Hooks): void;
+declare function setup(userConfig: Config): void;
 declare function goto(href: string, push?: boolean): boolean;
 declare function mtos(): void;
 
-export { check, goto, mtos, useFilter, useHooks, useRequest };
+export { check, goto, mtos, setup };

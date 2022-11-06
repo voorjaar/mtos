@@ -1,7 +1,7 @@
 {
   "name": "mtos",
   "type": "module",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Gives MPA a SPA-like user experience with no refreshing and incremenal loading.",
   "main": "dist/mtos.js",
   "module": "dist/mtos.mjs",
