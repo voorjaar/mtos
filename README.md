@@ -54,25 +54,70 @@ Recommendations:
 
 Goto target href.
 
+#### Type
+
 ```typescript
 function goto(href: string, push?: boolean): boolean;
+```
+
+#### Example
+
+```typescript
+mtos.goto("/blog/1");
 ```
 
 ### `check`
 
 Check if link is internal link.
 
+#### Type
+
 ```typescript
 function check(a: HTMLAnchorElement): boolean;
+```
+
+#### Example
+
+```typescript
+mtos.check("https://localhost:5050/blog/1"); // true
 ```
 
 ### `useFilter`
 
 Replace default filter, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
 
+#### Type
+
 ```typescript
 type Filter = (a: HTMLAnchorElement) => boolean;
 function useFilter(f: Filter): void;
+```
+
+#### Example
+
+```typescript
+mtos.useFilter(({ href }) => href.endsWith("abc"));
+```
+
+### `useRequest`
+
+Set the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) request options.
+
+#### Type
+
+```typescript
+function useRequest(init?: RequestInit | undefined): void;
+```
+
+#### Example
+
+```typescript
+mtos.useRequest({
+  headers: {
+    Cookie: "xxx=yyy",
+  },
+  credentials: "same-origin",
+});
 ```
 
 ### `mtos`
