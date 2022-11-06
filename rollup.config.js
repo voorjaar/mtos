@@ -3,6 +3,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
+import dts from "rollup-plugin-dts";
 import del from "rollup-plugin-delete";
 import { copyFileSync, rmSync } from "fs";
 
@@ -61,23 +62,30 @@ export default [
           },
           safari10: true,
         }),
-        {
-          name: "copy-types",
-          closeBundle() {
-            if (format === "iife") {
-              copyFileSync("./dist/src/index.d.ts", `./dist/${name}.d.ts`);
-              copyFileSync(
-                `./dist/${name}-iife.min.js`,
-                `./demo/public/javascripts/${name}.min.js`
-              );
-              rmSync("./dist/src", { recursive: true, force: true });
-            }
-          },
-        },
       ],
       treeshake: {
         moduleSideEffects: false,
       },
     })
   ),
+  {
+    input: "dist/src/index.d.ts",
+    output: {
+      file: `dist/${name}.d.ts`,
+      format: "es",
+    },
+    plugins: [
+      dts(),
+      {
+        name: "copy-types",
+        closeBundle() {
+          copyFileSync(
+            `./dist/${name}-iife.min.js`,
+            `./demo/public/javascripts/${name}.min.js`
+          );
+          rmSync("./dist/src", { recursive: true, force: true });
+        },
+      },
+    ],
+  },
 ];
