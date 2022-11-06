@@ -24,8 +24,15 @@ export type Filter = (a: HTMLAnchorElement) => boolean;
 
 export type ScrollOptions = { enable?: boolean } & ScrollToOptions;
 
-export type Config = Hooks & {
-  filter?: Filter;
-  fetch?: RequestInit;
+export type GotoOptions = {
+  pushState?: boolean;
   scroll?: ScrollOptions;
 };
+
+export type ResolvedConfig = Hooks & {
+  filter: Filter;
+  fetch?: RequestInit;
+  scroll: ScrollOptions;
+};
+
+export type Config = Partial<ResolvedConfig>;

@@ -1,9 +1,29 @@
 import morphdom from "morphdom";
-import type { Config } from "./types";
+import type {
+  Config,
+  ResolvedConfig,
+  ScrollOptions,
+  GotoOptions,
+} from "./types";
 
-var config: Config = {
-  filter: check,
+const defaultScrollOptions: ScrollOptions = {
+  enable: true,
+  top: 0,
+  left: 0,
+  behavior: "smooth",
 };
+
+const scrollPositions: {
+  top: number;
+  left: number;
+}[] = [];
+
+const defaultConfig = {
+  filter: check,
+  scroll: defaultScrollOptions,
+};
+
+var config: ResolvedConfig = defaultConfig;
 
 export function check({ href, target, host }: HTMLAnchorElement) {
   return (
@@ -14,37 +34,37 @@ export function check({ href, target, host }: HTMLAnchorElement) {
 }
 
 export function setup(userConfig: Config) {
-  config = userConfig;
+  config = { ...defaultConfig, ...userConfig };
 }
 
-export function goto(href: string, push = true) {
+export function goto(href: string, options: GotoOptions = {}) {
   fetch(href, config.fetch)
     .then((response) => response.text())
     .then((html) => {
       const box = document.createElement("html");
       box.innerHTML = html;
 
-      if (push)
+      if (options.pushState !== false) {
+        scrollPositions.push({
+          top: document.body.scrollTop,
+          left: document.body.scrollLeft,
+        });
+
         history.pushState(
           {},
           document.head.querySelector("title")?.innerText || "Document",
           href
         );
+      }
 
       const head = box.querySelector("head");
       const body = box.querySelector("body");
 
-      const scrollOptions = config.scroll || {
-        enable: true,
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      };
-
-      scrollOptions?.enable && window.scrollTo(scrollOptions);
-
       head && morphdom(document.head, head);
       body && morphdom(document.body, body, config);
+
+      const scrollOptions = options.scroll || config.scroll;
+      scrollOptions?.enable && window.scrollTo(scrollOptions);
 
       mtos();
     });
@@ -69,7 +89,13 @@ export function mtos() {
 
 window.addEventListener("load", mtos);
 
-window.addEventListener("popstate", (event) => {
-  //   console.log(event.state);
-  goto(document.location.href, false);
+window.addEventListener("popstate", () => {
+  goto(document.location.href, {
+    pushState: false,
+    scroll: {
+      enable: true,
+      behavior: "auto",
+      ...(scrollPositions.pop() || { top: 0, left: 0 }),
+    },
+  });
 });
