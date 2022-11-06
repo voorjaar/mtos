@@ -3,12 +3,20 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script src="/javascripts/mtos.min.js"></script>
-    {{! <script src="https://cdn.jsdelivr.net/npm/mtos@0.3.0/dist/mtos-iife.min.js"></script> }}
+    {{! <script src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-iife.min.js"></script> }}
     <script>
       mtos.useFilter(({host, href}) => !href.endsWith("refresh") && host ===
       window.location.host);
       
       mtos.useRequest({ headers: { mtos: true, } });
+
+      mtos.useHooks({
+        onBeforeElUpdated(fromEl, toEl) {
+          if (toEl.tagName === "H1") {
+            console.log(toEl.innerText);
+          }
+        }
+      })
     </script>
   </head>
   <body>
