@@ -1,19 +1,22 @@
 {
-  "name": "m2s",
+  "name": "mtos",
   "version": "0.1.0",
   "description": "Gives MPA a SPA-like user experience with no refreshing and incremenal loading.",
-  "main": "dist/m2s.js",
-  "module": "dist/m2s.mjs",
-  "jsnext:main": "dist/m2s-esm.js",
-  "types": "dist/m2s.d.ts",
+  "main": "dist/mtos.js",
+  "module": "dist/mtos.mjs",
+  "jsnext:main": "dist/mtos-esm.js",
+  "types": "dist/mtos.d.ts",
   "scripts": {
     "demo": "node ./demo/bin/www",
     "dev": "rollup -cw --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "mpa",
+    "spa"
+  ],
+  "author": "Raven Satir",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",

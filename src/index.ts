@@ -20,13 +20,13 @@ export function goto(href: string, push = true) {
       head && morphdom(document.head, head);
       body && morphdom(document.body, body);
 
-      m2s();
+      mtos();
     });
 
   return false;
 }
 
-export function m2s() {
+export function mtos() {
   document.querySelectorAll("a").forEach((a) => {
     // a.addEventListener("mouseover", () => {
     // TODO: maybe cache html when hover link
@@ -40,7 +40,7 @@ export function m2s() {
   });
 }
 
-window.addEventListener("load", m2s);
+window.addEventListener("load", mtos);
 
 window.addEventListener("popstate", (event) => {
   //   console.log(event.state);
