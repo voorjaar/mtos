@@ -1,0 +1,12 @@
+<style>
+  .posts { display: flex; flex-direction: column; margin: 0 0 1em 0;
+  line-height: 1.5; }
+</style>
+
+<h1>Recent posts</h1>
+
+<ul class="posts">
+  {{#each posts}}
+    <li><a href="/blog/{{id}}">{{id}}. {{title}}</a></li>
+  {{/each}}
+</ul>
