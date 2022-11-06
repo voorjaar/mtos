@@ -11,10 +11,20 @@
     "dev": "rollup -cw --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "mpa",
     "spa"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/mtos.mjs",
+      "require": "./dist/mtos.js"
+    }
+  },
   "author": "Raven Satir",
   "license": "MIT",
   "devDependencies": {
