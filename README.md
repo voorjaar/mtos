@@ -183,6 +183,7 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 
 ## TODOs
 
+- fix: eval script block
 - fix: restore scrolling position when go back
 - feat: support animation between pages
 - feat: support diff root elements that not head and body
