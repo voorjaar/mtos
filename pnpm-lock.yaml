@@ -1,0 +1,51 @@
+lockfileVersion: 5.4
+
+specifiers:
+  morphdom: ^2.6.1
+  nanomorph: ^5.4.3
+  rollup: ^3.2.5
+  typescript: ^4.8.4
+
+devDependencies:
+  morphdom: 2.6.1
+  nanomorph: 5.4.3
+  rollup: 3.2.5
+  typescript: 4.8.4
+
+packages:
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /morphdom/2.6.1:
+    resolution: {integrity: sha512-Y8YRbAEP3eKykroIBWrjcfMw7mmwJfjhqdpSvoqinu8Y702nAwikpXcNFDiIkyvfCLxLM9Wu95RZqo4a9jFBaA==}
+    dev: true
+
+  /nanoassert/1.1.0:
+    resolution: {integrity: sha512-C40jQ3NzfkP53NsO8kEOFd79p4b9kDXQMwgiY1z8ZwrDZgUyom0AHwGegF4Dm99L+YoYhuaB0ceerUcXmqr1rQ==}
+    dev: true
+
+  /nanomorph/5.4.3:
+    resolution: {integrity: sha512-uPP5y0x21KISffZCKHh1A0QW0RHZFQS0BR7LetlHBlay6UWAbjwhjiJTxOO6JeMHko5Cigl617zFoGrYFJ8ZLg==}
+    dependencies:
+      nanoassert: 1.1.0
+    dev: true
+
+  /rollup/3.2.5:
+    resolution: {integrity: sha512-/Ha7HhVVofduy+RKWOQJrxe4Qb3xyZo+chcpYiD8SoQa4AG7llhupUtyfKSSrdBM2mWJjhM8wZwmbY23NmlIYw==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /typescript/4.8.4:
+    resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
