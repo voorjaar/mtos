@@ -6,6 +6,7 @@ specifiers:
   morphdom: ^2.6.1
   rollup: ^3.2.5
   rollup-plugin-delete: ^2.0.0
+  rollup-plugin-dts: ^5.0.0
   rollup-plugin-terser: ^7.0.2
   rollup-plugin-typescript2: ^0.34.1
   typescript: ^4.8.4
@@ -16,6 +17,7 @@ devDependencies:
   morphdom: 2.6.1
   rollup: 3.2.5
   rollup-plugin-delete: 2.0.0
+  rollup-plugin-dts: 5.0.0_oa2candk7eitu7usnsurwiyuuu
   rollup-plugin-terser: 7.0.2_rollup@3.2.5
   rollup-plugin-typescript2: 0.34.1_oa2candk7eitu7usnsurwiyuuu
   typescript: 4.8.4
@@ -696,6 +698,20 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       del: 5.1.0
+    dev: true
+
+  /rollup-plugin-dts/5.0.0_oa2candk7eitu7usnsurwiyuuu:
+    resolution: {integrity: sha512-OO8ayCvuJCKaQSShyVTARxGurVVk4ulzbuvz+0zFd1f93vlnWFU5pBMT7HFeS6uj7MvvZLx4kUAarGATSU1+Ng==}
+    engines: {node: '>=v14'}
+    peerDependencies:
+      rollup: ^3.0.0
+      typescript: ^4.1
+    dependencies:
+      magic-string: 0.26.7
+      rollup: 3.2.5
+      typescript: 4.8.4
+    optionalDependencies:
+      '@babel/code-frame': 7.18.6
     dev: true
 
   /rollup-plugin-terser/7.0.2_rollup@3.2.5:

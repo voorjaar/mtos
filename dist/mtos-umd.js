@@ -765,11 +765,15 @@
   }
   var filter = check;
   var request;
+  var options;
   function useFilter(f) {
       filter = f;
   }
   function useRequest(init) {
       request = init;
+  }
+  function useHooks(hooks) {
+      options = hooks;
   }
   function goto(href, push = true) {
       fetch(href, request)
@@ -783,7 +787,7 @@
           const head = box.querySelector("head");
           const body = box.querySelector("body");
           head && morphdom(document.head, head);
-          body && morphdom(document.body, body);
+          body && morphdom(document.body, body, options);
           mtos();
       });
       return false;
@@ -812,6 +816,7 @@
   exports.goto = goto;
   exports.mtos = mtos;
   exports.useFilter = useFilter;
+  exports.useHooks = useHooks;
   exports.useRequest = useRequest;
 
 }));
