@@ -5,7 +5,9 @@
     <script src="/javascripts/mtos.min.js"></script>
     <script>
       mtos.useFilter(({host, href}) => !href.endsWith("refresh") && host ===
-      window.location.host)
+      window.location.host);
+      
+      mtos.useRequest({ headers: { mtos: true, } });
     </script>
   </head>
   <body>
