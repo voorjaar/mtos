@@ -120,6 +120,42 @@ mtos.useRequest({
 });
 ```
 
+### `useHooks`
+
+Set hooks that used when node changes.
+
+#### Type
+
+```typescript
+interface Hooks {
+  getNodeKey?: (node: Node) => any;
+  onBeforeNodeAdded?: (node: Node) => Node;
+  onNodeAdded?: (node: Node) => Node;
+  onBeforeElUpdated?: (fromEl: HTMLElement, toEl: HTMLElement) => boolean;
+  onElUpdated?: (el: HTMLElement) => void;
+  onBeforeNodeDiscarded?: (node: Node) => boolean;
+  onNodeDiscarded?: (node: Node) => void;
+  onBeforeElChildrenUpdated?: (
+    fromEl: HTMLElement,
+    toEl: HTMLElement
+  ) => boolean;
+}
+
+function useHooks(hooks: Hooks): void;
+```
+
+#### Example
+
+```typescript
+mtos.useHooks({
+  onBeforeNodeAdded(node) {
+    if (node.tagName === "P") {
+      console.log(node.innerText);
+    }
+  },
+});
+```
+
 ### `mtos`
 
 Main function, add `onclick` property to all internal link elements.
@@ -150,9 +186,10 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 - fix: restore scrolling position when go back
 - feat: support animation between pages
 - feat: support diff root elements that not head and body
-- feat: support filer target link
+- feat: cache page when hover link (optional)
+- ~~feat: support filer target link~~
 - feat: support onMount, onUnmount, ...hooks
-- feat: support fetch hook, enable request with cookie
+- ~~feat: support fetch hook, enable request with cookie~~
 - feat: support update part of elements, like htmx
 
 ## License
