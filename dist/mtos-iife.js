@@ -761,8 +761,15 @@ var mtos = (function (exports) {
           (target === "" || target === "_self"));
   }
   var filter = check;
+  var request;
+  function useFilter(f) {
+      filter = f;
+  }
+  function useRequest(init) {
+      request = init;
+  }
   function goto(href, push = true) {
-      fetch(href)
+      fetch(href, request)
           .then((response) => response.text())
           .then((html) => {
           var _a;
@@ -777,9 +784,6 @@ var mtos = (function (exports) {
           mtos();
       });
       return false;
-  }
-  function useFilter(f) {
-      filter = f;
   }
   function mtos() {
       document.querySelectorAll("a").forEach((a) => {
@@ -805,6 +809,7 @@ var mtos = (function (exports) {
   exports.goto = goto;
   exports.mtos = mtos;
   exports.useFilter = useFilter;
+  exports.useRequest = useRequest;
 
   return exports;
 

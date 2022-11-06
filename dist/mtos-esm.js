@@ -758,8 +758,15 @@ function check({ href, target, host }) {
         (target === "" || target === "_self"));
 }
 var filter = check;
+var request;
+function useFilter(f) {
+    filter = f;
+}
+function useRequest(init) {
+    request = init;
+}
 function goto(href, push = true) {
-    fetch(href)
+    fetch(href, request)
         .then((response) => response.text())
         .then((html) => {
         var _a;
@@ -774,9 +781,6 @@ function goto(href, push = true) {
         mtos();
     });
     return false;
-}
-function useFilter(f) {
-    filter = f;
 }
 function mtos() {
     document.querySelectorAll("a").forEach((a) => {
@@ -798,4 +802,4 @@ window.addEventListener("popstate", (event) => {
     goto(document.location.href, false);
 });
 
-export { check, goto, mtos, useFilter };
+export { check, goto, mtos, useFilter, useRequest };
