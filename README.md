@@ -21,13 +21,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -35,7 +35,7 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-esm.js"
 ></script>
 ```
 
@@ -188,7 +188,7 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 - feat: support diff root elements that not head and body
 - feat: cache page when hover link (optional)
 - ~~feat: support filer target link~~
-- feat: support onMount, onUnmount, ...hooks
+- ~~feat: support onMount, onUnmount, ...hooks~~
 - ~~feat: support fetch hook, enable request with cookie~~
 - feat: support update part of elements, like htmx
 
