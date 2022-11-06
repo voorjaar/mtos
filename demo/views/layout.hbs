@@ -3,6 +3,10 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script src="/javascripts/mtos.min.js"></script>
+    <script>
+      mtos.useFilter(({host, href}) => !href.endsWith("refresh") && host ===
+      window.location.host)
+    </script>
   </head>
   <body>
     <nav>
@@ -13,6 +17,12 @@
         </li>
         <li>
           <a href="/about">About</a>
+        </li>
+        <li>
+          <a href="/refresh">Refresh</a>
+        </li>
+        <li>
+          <a href="https://github.com/voorjaar/mtos">GitHub</a>
         </li>
       </ul>
     </nav>

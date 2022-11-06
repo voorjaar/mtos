@@ -28,6 +28,10 @@ router.get("/about", (req, res, next) => {
   res.render("about", { title: "About" });
 });
 
+router.get("/refresh", (req, res, next) => {
+  res.render("refresh", { title: "Refresh" });
+});
+
 router.get("/blog", (req, res, next) => {
   res.render("blog", { title: "Recent posts", posts });
 });
