@@ -9,6 +9,41 @@ Gives MPA a SPA-like user experience with no refreshing and incremenal loading.
 
 ## Getting Started
 
+### Install
+
+```sh
+npm install --save-dev mtos
+```
+
+### CDN
+
+#### IIFE
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/mtos/dist/mtos-iife.min.js"></script>
+```
+
+#### UMD
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/mtos/dist/mtos-umd.min.js"></script>
+```
+
+#### ESM
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/mtos/dist/mtos-esm.js"></script>
+```
+
+### Static
+
+You can copy the scripts in the [dist](https://github.com/voorjaar/mtos/blob/main/dist/) folder directly to your web server static folder.
+
+Recommendations:
+
+- [mtos-iife.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-iife.min.js)
+- [mtos-umd.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-umd.min.js)
+
 ## How It Works
 
 ## Use Cases
