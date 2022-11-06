@@ -48,11 +48,46 @@ Recommendations:
 - [mtos-iife.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-iife.min.js)
 - [mtos-umd.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-umd.min.js)
 
+## API
+
+### `goto`
+
+Goto target href.
+
+```typescript
+function goto(href: string, push?: boolean): boolean;
+```
+
+### `check`
+
+Check if link is internal link.
+
+```typescript
+function check(a: HTMLAnchorElement): boolean;
+```
+
+### `useFilter`
+
+Replace default filter, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
+
+```typescript
+type Filter = (a: HTMLAnchorElement) => boolean;
+function useFilter(f: Filter): void;
+```
+
+### `mtos`
+
+Main function, add `onclick` property to all internal link elements.
+
+```typescript
+function mtos(): void;
+```
+
 ## How It Works
 
 Mtos works similar to SPA, but is based on native dom. The workflow like this:
 
-1. Query all `<a>` elements which property `href` starts with `/`.
+1. Query all `<a>` elements which property `href` includes current host.
 2. Add a `onclick` function, when clicked, fetch the html content from target link.
 3. Diff current document with fetched content, update changed elements.
 4. Goto 1.
