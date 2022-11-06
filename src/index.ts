@@ -1,5 +1,9 @@
 import morphdom from "morphdom";
-import type { Filter, Hooks } from "./types";
+import type { Config } from "./types";
+
+var config: Config = {
+  filter: check,
+};
 
 export function check({ href, target, host }: HTMLAnchorElement) {
   return (
@@ -9,26 +13,12 @@ export function check({ href, target, host }: HTMLAnchorElement) {
   );
 }
 
-var filter: Filter = check;
-
-var request: RequestInit | undefined;
-
-var options: Hooks | undefined;
-
-export function useFilter(f: Filter) {
-  filter = f;
-}
-
-export function useRequest(init?: RequestInit | undefined) {
-  request = init;
-}
-
-export function useHooks(hooks: Hooks) {
-  options = hooks;
+export function setup(userConfig: Config) {
+  config = userConfig;
 }
 
 export function goto(href: string, push = true) {
-  fetch(href, request)
+  fetch(href, config.fetch)
     .then((response) => response.text())
     .then((html) => {
       const box = document.createElement("html");
@@ -44,8 +34,17 @@ export function goto(href: string, push = true) {
       const head = box.querySelector("head");
       const body = box.querySelector("body");
 
+      const scrollOptions = config.scroll || {
+        enable: true,
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      };
+
+      scrollOptions?.enable && window.scrollTo(scrollOptions);
+
       head && morphdom(document.head, head);
-      body && morphdom(document.body, body, options);
+      body && morphdom(document.body, body, config);
 
       mtos();
     });
@@ -59,7 +58,7 @@ export function mtos() {
     // TODO: maybe cache html when hover link
     //   console.log("entered");
     // });
-    if (filter(a))
+    if (config.filter!(a))
       a.onclick = () => {
         //   console.log(old);
         //   if (old) old();

@@ -21,3 +21,11 @@ export interface Hooks {
 }
 
 export type Filter = (a: HTMLAnchorElement) => boolean;
+
+export type ScrollOptions = { enable?: boolean } & ScrollToOptions;
+
+export type Config = Hooks & {
+  filter?: Filter;
+  fetch?: RequestInit;
+  scroll?: ScrollOptions;
+};
