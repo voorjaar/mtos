@@ -12,8 +12,18 @@ export function check({ href, target, host }: HTMLAnchorElement) {
 
 var filter: Filter = check;
 
+var request: RequestInit | undefined;
+
+export function useFilter(f: Filter) {
+  filter = f;
+}
+
+export function useRequest(init?: RequestInit | undefined) {
+  request = init;
+}
+
 export function goto(href: string, push = true) {
-  fetch(href)
+  fetch(href, request)
     .then((response) => response.text())
     .then((html) => {
       const box = document.createElement("html");
@@ -36,10 +46,6 @@ export function goto(href: string, push = true) {
     });
 
   return false;
-}
-
-export function useFilter(f: Filter) {
-  filter = f;
 }
 
 export function mtos() {
