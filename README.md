@@ -21,13 +21,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.3.0/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.3.0/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -35,7 +35,7 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.3.0/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.4.0/dist/mtos-esm.js"
 ></script>
 ```
 
