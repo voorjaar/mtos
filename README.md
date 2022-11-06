@@ -173,8 +173,9 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 
 1. Query all `<a>` elements which property `href` includes current host.
 2. Add a `onclick` function, when clicked, fetch the html content from target link.
-3. Diff current document with fetched content, update changed elements.
-4. Goto 1.
+3. Push link to [history](https://developer.mozilla.org/en-US/docs/Web/API/History_API) state.
+4. Diff current document with fetched content, update changed elements.
+5. Goto 1.
 
 ## Use Cases
 
@@ -187,7 +188,7 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 ## TODOs
 
 - fix: eval script block
-- fix: restore scrolling position when go back
+- ~~fix: restore scrolling position when go back~~
 - feat: support animation between pages
 - feat: support diff root elements that not head and body
 - feat: cache page when hover link (optional)
