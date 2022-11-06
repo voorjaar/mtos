@@ -64,8 +64,14 @@ export default [
         {
           name: "copy-types",
           closeBundle() {
-            copyFileSync("./dist/src/index.d.ts", "./dist/m2s.d.ts");
-            rmSync("./dist/src", { recursive: true, force: true });
+            if (format === "iife") {
+              copyFileSync("./dist/src/index.d.ts", "./dist/m2s.d.ts");
+              copyFileSync(
+                "./dist/m2s-iife.min.js",
+                "./demo/public/javascripts/m2s.min.js"
+              );
+              rmSync("./dist/src", { recursive: true, force: true });
+            }
           },
         },
       ],
