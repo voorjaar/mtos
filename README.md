@@ -2,6 +2,7 @@
 
 <p align="left">
   <a href="https://www.npmjs.com/package/mtos"><img src="https://img.shields.io/npm/v/mtos.svg?color=0EA5E9" alt="Npm Version"></a>
+  <a href="https://www.npmjs.com/package/mtos"><img src="https://img.shields.io/bundlephobia/min/mtos" alt="Minified Size"></a>
   <a href="https://www.npmjs.com/package/mtos"><img src="https://img.shields.io/npm/dt/mtos.svg?color=1388bd" alt="Total Downloads"></a>
 </p>
 
@@ -32,7 +33,10 @@ npm install --save-dev mtos
 #### ESM
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/mtos/dist/mtos-esm.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/mtos/dist/mtos-esm.js"
+></script>
 ```
 
 ### Static
@@ -46,7 +50,20 @@ Recommendations:
 
 ## How It Works
 
+Mtos works similar to SPA, but is based on native dom. The workflow like this:
+
+1. Query all `<a>` elements which property `href` starts with `/`.
+2. Add a `onclick` function, when clicked, fetch the html content from target link.
+3. Diff current document with fetched content, update changed elements.
+4. Goto 1.
+
 ## Use Cases
+
+- Enhance traditional **Multi Page Application**, so that pages do not need to be refreshed for a **better user experience** and no changes to the project structure are required.
+
+- Enhance **Static Site Generators** to give the original multi-page architecture a SPA-like experience.
+
+- Creating simple websites using just html can be used to replace the **SPA + SSR architecture** in many simple cases.
 
 ## TODOs
 
