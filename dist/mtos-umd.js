@@ -1,5 +1,8 @@
-var m2s = (function (exports) {
-  'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.mtos = {}));
+})(this, (function (exports) { 'use strict';
 
   var DOCUMENT_FRAGMENT_NODE = 11;
 
@@ -768,11 +771,11 @@ var m2s = (function (exports) {
           const body = box.querySelector("body");
           head && morphdom(document.head, head);
           body && morphdom(document.body, body);
-          m2s();
+          mtos();
       });
       return false;
   }
-  function m2s() {
+  function mtos() {
       document.querySelectorAll("a").forEach((a) => {
           // a.addEventListener("mouseover", () => {
           // TODO: maybe cache html when hover link
@@ -785,15 +788,13 @@ var m2s = (function (exports) {
           };
       });
   }
-  window.addEventListener("load", m2s);
+  window.addEventListener("load", mtos);
   window.addEventListener("popstate", (event) => {
       //   console.log(event.state);
       goto(document.location.href, false);
   });
 
   exports.goto = goto;
-  exports.m2s = m2s;
+  exports.mtos = mtos;
 
-  return exports;
-
-})({});
+}));

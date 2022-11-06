@@ -765,11 +765,11 @@ function goto(href, push = true) {
         const body = box.querySelector("body");
         head && morphdom(document.head, head);
         body && morphdom(document.body, body);
-        m2s();
+        mtos();
     });
     return false;
 }
-function m2s() {
+function mtos() {
     document.querySelectorAll("a").forEach((a) => {
         // a.addEventListener("mouseover", () => {
         // TODO: maybe cache html when hover link
@@ -782,10 +782,10 @@ function m2s() {
         };
     });
 }
-window.addEventListener("load", m2s);
+window.addEventListener("load", mtos);
 window.addEventListener("popstate", (event) => {
     //   console.log(event.state);
     goto(document.location.href, false);
 });
 
-export { goto, m2s };
+export { goto, mtos };
