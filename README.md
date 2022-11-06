@@ -21,13 +21,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.5.0/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.5.0/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -35,7 +35,7 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.4.1/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.5.0/dist/mtos-esm.js"
 ></script>
 ```
 
@@ -82,52 +82,26 @@ function check(a: HTMLAnchorElement): boolean;
 mtos.check("https://localhost:5050/blog/1"); // true
 ```
 
-### `useFilter`
+### `setup`
 
-Replace default filter, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
-
-#### Type
-
-```typescript
-type Filter = (a: HTMLAnchorElement) => boolean;
-function useFilter(f: Filter): void;
-```
-
-#### Example
-
-```typescript
-mtos.useFilter(({ href }) => href.endsWith("abc"));
-```
-
-### `useRequest`
-
-Set the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) request options.
+Setup [mtos](https://www.npmjs.com/package/mtos) with user configuration.
 
 #### Type
 
 ```typescript
-function useRequest(init?: RequestInit | undefined): void;
-```
-
-#### Example
-
-```typescript
-mtos.useRequest({
-  headers: {
-    Cookie: "xxx=yyy",
-  },
-  credentials: "same-origin",
-});
-```
-
-### `useHooks`
-
-Set hooks that used when node changes.
-
-#### Type
-
-```typescript
-interface Hooks {
+interface Config {
+  /** Fetch Options */
+  fetch?: RequestInit;
+  /** Auto Scroll Behavior */
+  scroll?: {
+    enable?: boolean;
+    left?: number;
+    top?: number;
+    behavior?: "auto" | "smooth";
+  };
+  /** Link Filter */
+  filter: (a: HTMLAnchorElement) => boolean;
+  /** Dom Diff Hooks */
   getNodeKey?: (node: Node) => any;
   onBeforeNodeAdded?: (node: Node) => Node;
   onNodeAdded?: (node: Node) => Node;
@@ -141,20 +115,49 @@ interface Hooks {
   ) => boolean;
 }
 
-function useHooks(hooks: Hooks): void;
+function setup(userConfig: Config): void;
 ```
 
 #### Example
 
-```typescript
-mtos.useHooks({
-  onBeforeNodeAdded(node) {
-    if (node.tagName === "P") {
-      console.log(node.innerText);
-    }
-  },
-});
-```
+- Use New Filter
+
+  Replace default filter, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
+
+  ```typescript
+  mtos.setup({
+    filter: ({ href }) => href.endsWith("abc"),
+  });
+  ```
+
+- Use Fetch Options
+
+  Setup the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) request options.
+
+  ```typescript
+  mtos.setup({
+    fetch: {
+      headers: {
+        Cookie: "xxx=yyy",
+      },
+      credentials: "same-origin",
+    },
+  });
+  ```
+
+- Use Hooks
+
+  Setup hooks used when element changes.
+
+  ```typescript
+  mtos.setup({
+    onBeforeNodeAdded(node) {
+      if (node.tagName === "P") {
+        console.log(node.innerText);
+      }
+    },
+  });
+  ```
 
 ### `mtos`
 
