@@ -19,7 +19,7 @@ const scrollPositions: {
 }[] = [];
 
 const defaultConfig = {
-  filter: check,
+  onMatch: check,
   scroll: defaultScrollOptions,
 };
 
@@ -85,7 +85,7 @@ export function mtos() {
     // TODO: maybe cache html when hover link
     //   console.log("entered");
     // });
-    if (config.filter!(a))
+    if (config.onMatch!(a))
       a.onclick = () => {
         //   console.log(old);
         //   if (old) old();

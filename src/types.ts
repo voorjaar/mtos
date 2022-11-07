@@ -1,4 +1,6 @@
 export interface Hooks {
+  /** Called when matching `<a>` element, if return false, the link will be ignore. By default, the value is `check` */
+  onMatch?(a: HTMLAnchorElement): boolean;
   /** Called before fetch the href, if return false, the link won't be rendered. */
   onFetchStart?(href: string): boolean | undefined | void;
   /** Called after fetch the html content, you can return a string to preprocess it before rendering */
@@ -30,8 +32,6 @@ export interface Hooks {
   ) => boolean;
 }
 
-export type Filter = (a: HTMLAnchorElement) => boolean;
-
 export type ScrollOptions = { enable?: boolean } & ScrollToOptions;
 
 export type GotoOptions = {
@@ -40,7 +40,6 @@ export type GotoOptions = {
 };
 
 export type ResolvedConfig = Hooks & {
-  filter: Filter;
   fetch?: RequestInit;
   scroll: ScrollOptions;
 };
