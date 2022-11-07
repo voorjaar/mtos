@@ -22,8 +22,15 @@
           return !href.endsWith("refresh") && host === window.location.host
         },
         onBeforeElUpdated(fromEl, toEl) {
-          if (toEl.tagName === "H1") {
-            console.log(toEl.innerText);
+          if (toEl.tagName === "MAIN") {
+            toEl.classList.add("animated", "fadeIn");
+          }
+        },
+        onElUpdated(el) {
+           if (el.tagName === "MAIN") {
+            setTimeout(() => {
+              el.classList.remove("animated", "fadeIn");
+            }, 250)
           }
         },
         onFetchStart() {
@@ -64,7 +71,7 @@
     <div class="progress" style="height: 1px; border-radius: 0px;">
       <div class="progress-bar" role="progressbar" style="background-color: #01B7FF; width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-    <main>
+    <main class="animated fadeIn">
       {{{body}}}
     </main>
   </body>
