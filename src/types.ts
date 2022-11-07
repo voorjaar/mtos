@@ -1,4 +1,14 @@
 export interface Hooks {
+  /** Called before fetch the href, if return false, the link won't be rendered. */
+  onFetchStart?(href: string): boolean | undefined | void;
+  /** Called after fetch the html content, you can return a string to preprocess it before rendering */
+  onFetchEnd?: (html: string, href: string) => string | undefined | void;
+  /** Called when fetch api throw an error */
+  onFetchError?: (error: Error, href: string) => void;
+  /** Called before render the fetched page. */
+  onBeforePageRendered?: (href: string) => void;
+  /** Called after page has been rendered. */
+  onPageRendered?: (href: string) => void;
   /** Called to get the Node's unique identifier. This is used by morphdom to rearrange elements rather than creating and destroying an element that already exists. This defaults to using the Node's id property. (Note that form fields must not have a name corresponding to forms' DOM properties, e.g. id.) */
   getNodeKey?: (node: Node) => any;
   /** Called before a Node in the to tree is added to the from tree. If this function returns false then the node will not be added. Should return the node to be added. */
