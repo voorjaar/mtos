@@ -99,9 +99,17 @@ interface Config {
     top?: number;
     behavior?: "auto" | "smooth";
   };
-  /** Link Filter */
-  filter: (a: HTMLAnchorElement) => boolean;
-  /** Dom Diff Hooks */
+  /** Fetch Hooks */
+  onMatch: (a: HTMLAnchorElement) => boolean;
+  onFetchStart?(href: string): boolean | undefined | void;
+  onFetchEnd?: (html: string, href: string) => string | undefined | void;
+  onFetchError?: (error: Error, href: string) => void;
+
+  /** Render Hooks */
+  onBeforePageRendered?: (href: string) => void;
+  onPageRendered?: (href: string) => void;
+
+  /** Dom Patch Hooks */
   getNodeKey?: (node: Node) => any;
   onBeforeNodeAdded?: (node: Node) => Node;
   onNodeAdded?: (node: Node) => Node;
@@ -120,13 +128,13 @@ function setup(userConfig: Config): void;
 
 #### Example
 
-- Use New Filter
+- Use New Match Function
 
-  Replace default filter, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
+  Replace default match function, check if link is internal link, if `true` enable [mtos](https://www.npmjs.com/package/mtos), if `false` ignore this link. By default, the function is `check`.
 
   ```typescript
   mtos.setup({
-    filter: ({ href }) => href.endsWith("abc"),
+    onMatch: ({ href }) => href.endsWith("abc"),
   });
   ```
 
@@ -155,6 +163,27 @@ function setup(userConfig: Config): void;
       if (node.tagName === "P") {
         console.log(node.innerText);
       }
+    },
+  });
+  ```
+
+- Life Cycle
+
+  Using life cycle hooks to update progress.
+
+  ```typescript
+  mtos.setup({
+    onFetchStart() {
+      updateProgress(0);
+    },
+    onFetchEnd() {
+      updateProgress(60);
+    },
+    onBeforePageRendered() {
+      updateProgress(80);
+    },
+    onPageRendered() {
+      updateProgress(100);
     },
   });
   ```
