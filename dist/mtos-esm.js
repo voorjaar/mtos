@@ -760,7 +760,7 @@ const defaultScrollOptions = {
 };
 const scrollPositions = [];
 const defaultConfig = {
-    filter: check,
+    onMatch: check,
     scroll: defaultScrollOptions,
 };
 var config = defaultConfig;
@@ -773,27 +773,33 @@ function setup(userConfig) {
     config = Object.assign(Object.assign({}, defaultConfig), userConfig);
 }
 function goto(href, options = {}) {
+    var _a;
+    if (((_a = config.onFetchStart) === null || _a === void 0 ? void 0 : _a.call(config, href)) === false)
+        return;
     fetch(href, config.fetch)
         .then((response) => response.text())
         .then((html) => {
-        var _a;
+        var _a, _b, _c, _d;
         const box = document.createElement("html");
-        box.innerHTML = html;
+        box.innerHTML = ((_a = config.onFetchEnd) === null || _a === void 0 ? void 0 : _a.call(config, html, href)) || html;
         if (options.pushState !== false) {
             scrollPositions.push({
                 top: document.body.scrollTop,
                 left: document.body.scrollLeft,
             });
-            history.pushState({}, ((_a = document.head.querySelector("title")) === null || _a === void 0 ? void 0 : _a.innerText) || "Document", href);
+            history.pushState({}, ((_b = document.head.querySelector("title")) === null || _b === void 0 ? void 0 : _b.innerText) || "Document", href);
         }
+        (_c = config.onBeforePageRendered) === null || _c === void 0 ? void 0 : _c.call(config, href);
         const head = box.querySelector("head");
         const body = box.querySelector("body");
         head && morphdom(document.head, head);
         body && morphdom(document.body, body, config);
+        (_d = config.onPageRendered) === null || _d === void 0 ? void 0 : _d.call(config, href);
         const scrollOptions = options.scroll || config.scroll;
         (scrollOptions === null || scrollOptions === void 0 ? void 0 : scrollOptions.enable) && window.scrollTo(scrollOptions);
         mtos();
-    });
+    })
+        .catch((e) => { var _a; return (_a = config.onFetchError) === null || _a === void 0 ? void 0 : _a.call(config, e, href); });
     return false;
 }
 function mtos() {
@@ -802,7 +808,7 @@ function mtos() {
         // TODO: maybe cache html when hover link
         //   console.log("entered");
         // });
-        if (config.filter(a))
+        if (config.onMatch(a))
             a.onclick = () => {
                 //   console.log(old);
                 //   if (old) old();
