@@ -92,6 +92,7 @@ Setup [mtos](https://www.npmjs.com/package/mtos) with user configuration.
 interface Config {
   /** Fetch Options */
   fetch?: RequestInit;
+
   /** Auto Scroll Behavior */
   scroll?: {
     enable?: boolean;
@@ -99,6 +100,7 @@ interface Config {
     top?: number;
     behavior?: "auto" | "smooth";
   };
+
   /** Fetch Hooks */
   onMatch: (a: HTMLAnchorElement) => boolean;
   onFetchStart?(href: string): boolean | undefined | void;
@@ -134,7 +136,9 @@ function setup(userConfig: Config): void;
 
   ```typescript
   mtos.setup({
-    onMatch: ({ href }) => href.endsWith("abc"),
+    onMatch({ host, href }) {
+      return !href.endsWith("refresh") && host === window.location.host;
+    },
   });
   ```
 
@@ -155,13 +159,20 @@ function setup(userConfig: Config): void;
 
 - Use Hooks
 
-  Setup hooks used when element changes.
+  Use patch hooks to enable transition animation.
 
   ```typescript
   mtos.setup({
-    onBeforeNodeAdded(node) {
-      if (node.tagName === "P") {
-        console.log(node.innerText);
+    onBeforeElUpdated(fromEl, toEl) {
+      if (toEl.tagName === "MAIN") {
+        toEl.classList.add("animated", "fadeIn");
+      }
+    },
+    onElUpdated(el) {
+      if (el.tagName === "MAIN") {
+        setTimeout(() => {
+          el.classList.remove("animated", "fadeIn");
+        }, 500);
       }
     },
   });
@@ -190,7 +201,7 @@ function setup(userConfig: Config): void;
 
 ### `mtos`
 
-Main function, add `onclick` property to all internal link elements.
+Main function, add `onclick` property to all matched link elements.
 
 ```typescript
 function mtos(): void;
@@ -217,14 +228,14 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 ## TODOs
 
 - fix: eval script block
-- ~~fix: restore scrolling position when go back~~
-- feat: support animation between pages
 - feat: support diff root elements that not head and body
 - feat: cache page when hover link (optional)
+- feat: support update part of elements, like htmx
+- ~~fix: restore scrolling position when go back~~
+- ~~feat: support animation between pages~~
 - ~~feat: support filer target link~~
 - ~~feat: support onMount, onUnmount, ...hooks~~
 - ~~feat: support fetch hook, enable request with cookie~~
-- feat: support update part of elements, like htmx
 
 ## License
 
