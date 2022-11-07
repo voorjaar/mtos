@@ -38,11 +38,13 @@ export function setup(userConfig: Config) {
 }
 
 export function goto(href: string, options: GotoOptions = {}) {
+  if (config.onFetchStart?.(href) === false) return;
+
   fetch(href, config.fetch)
     .then((response) => response.text())
     .then((html) => {
       const box = document.createElement("html");
-      box.innerHTML = html;
+      box.innerHTML = config.onFetchEnd?.(html, href) || html;
 
       if (options.pushState !== false) {
         scrollPositions.push({
@@ -57,17 +59,22 @@ export function goto(href: string, options: GotoOptions = {}) {
         );
       }
 
+      config.onBeforePageRendered?.(href);
+
       const head = box.querySelector("head");
       const body = box.querySelector("body");
 
       head && morphdom(document.head, head);
       body && morphdom(document.body, body, config);
 
+      config.onPageRendered?.(href);
+
       const scrollOptions = options.scroll || config.scroll;
       scrollOptions?.enable && window.scrollTo(scrollOptions);
 
       mtos();
-    });
+    })
+    .catch((e: Error) => config.onFetchError?.(e, href));
 
   return false;
 }
