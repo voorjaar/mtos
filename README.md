@@ -8,6 +8,8 @@
 
 Gives MPA a SPA-like user experience with no refreshing and incremenal loading.
 
+![Demo](https://github.com/voorjaar/mtos/blob/main/demo/record.gif)
+
 ## Getting Started
 
 ### Install
