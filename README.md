@@ -23,13 +23,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.6.0/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.0/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.6.0/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.0/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -37,11 +37,13 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.6.0/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.7.0/dist/mtos-esm.js"
 ></script>
 ```
 
 ### Static
+
+#### Copy
 
 You can copy the scripts in the [dist](https://github.com/voorjaar/mtos/blob/main/dist/) folder directly to your web server static folder.
 
@@ -49,6 +51,17 @@ Recommendations:
 
 - [mtos-iife.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-iife.min.js)
 - [mtos-umd.min.js](https://github.com/voorjaar/mtos/blob/main/dist/mtos-umd.min.js)
+
+#### Download
+
+You can also download the script using npm.
+
+```sh
+npm pack mtos
+tar -xzf mtos-0.7.0.tgz
+mv package/dist/mtos-iife.min.js .
+rm -r mtos-0.7.0.tgz package
+```
 
 ## API
 
