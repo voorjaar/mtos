@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://example.org/categories/</loc>
+    <lastmod>2022-10-13T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/categories/jekyll-update/</loc>
+    <lastmod>2022-10-13T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/</loc>
+    <lastmod>2022-10-13T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/</loc>
+    <lastmod>2022-10-13T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/what-is-markdown-good-for/</loc>
+    <lastmod>2022-10-13T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/how-does-it-work/</loc>
+    <lastmod>2022-10-12T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/why-use-markdown/</loc>
+    <lastmod>2022-10-11T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/posts/what-is-markdown/</loc>
+    <lastmod>2022-10-10T11:44:21+08:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/</loc>
+  </url>
+</urlset>

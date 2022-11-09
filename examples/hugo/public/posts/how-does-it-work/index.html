@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>How Does it Work? | My New Hugo Site</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.
+When you write in Markdown, the text is stored in a plaintext file that has an .md or .markdown extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?
+The short answer is that you need a Markdown application capable of processing the Markdown file.">
+    <meta name="generator" content="Hugo 0.105.0">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/animate.css">
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/mtos@0.7.0/dist/mtos-iife.min.js"></script>
+
+<script>
+  function updateProgress(  n) {
+    const bar = document.querySelector(".progress-bar");
+    if (!bar) return;
+    bar.style.width = n + "%";
+  }
+
+  mtos.setup({
+    onBeforeElUpdated(fromEl, toEl) {
+      if (toEl.tagName === "MAIN") {
+        toEl.classList.add("animated", "fadeIn");
+      }
+    },
+    onElUpdated(el) {
+      if (el.tagName === "MAIN") {
+        setTimeout(() => {
+          el.classList.remove("animated", "fadeIn");
+        }, 250);
+      }
+    },
+    onFetchStart() {
+      updateProgress(0);
+    },
+    onFetchEnd() {
+      updateProgress(60);
+    },
+    onBeforePageRendered() {
+      updateProgress(80);
+    },
+    onPageRendered() {
+      updateProgress(100);
+    },
+  });
+</script>
+
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="How Does it Work?" />
+<meta property="og:description" content="Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.
+When you write in Markdown, the text is stored in a plaintext file that has an .md or .markdown extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?
+The short answer is that you need a Markdown application capable of processing the Markdown file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/how-does-it-work/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-12T11:44:21+08:00" />
+<meta property="article:modified_time" content="2022-10-12T11:44:21+08:00" />
+
+<meta itemprop="name" content="How Does it Work?">
+<meta itemprop="description" content="Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.
+When you write in Markdown, the text is stored in a plaintext file that has an .md or .markdown extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?
+The short answer is that you need a Markdown application capable of processing the Markdown file."><meta itemprop="datePublished" content="2022-10-12T11:44:21+08:00" />
+<meta itemprop="dateModified" content="2022-10-12T11:44:21+08:00" />
+<meta itemprop="wordCount" content="354">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How Does it Work?"/>
+<meta name="twitter:description" content="Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.
+When you write in Markdown, the text is stored in a plaintext file that has an .md or .markdown extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?
+The short answer is that you need a Markdown application capable of processing the Markdown file."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        My New Hugo Site
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+    <div class="progress bg-gray w-100-m" style="height: 6px;">
+      <div class="progress-bar bg-blue" style="height: 100%; width: 0%;"></div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">How Does it Work?</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-10-12T11:44:21+08:00">October 12, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.</p>
+<p>When you write in Markdown, the text is stored in a plaintext file that has an <code>.md</code> or <code>.markdown</code> extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?</p>
+<p>The short answer is that you need a <em>Markdown application</em> capable of processing the Markdown file. There are lots of applications available — everything from simple scripts to desktop applications that look like Microsoft Word. Despite their visual differences, all of the applications do the same thing. Like Dillinger, they all convert Markdown-formatted text to HTML so it can be displayed in web browsers.</p>
+<p>Markdown applications use something called a <em>Markdown processor</em> (also commonly referred to as a “parser” or an “implementation”) to take the Markdown-formatted text and output it to HTML format. At that point, your document can be viewed in a web browser or combined with a style sheet and printed. You can see a visual representation of this process below.</p>
+<p><strong>Note:</strong> The Markdown application and processor are two separate components. For the sake of brevity, I&rsquo;ve combined them into one element (&ldquo;Markdown app&rdquo;) in the figure below.</p>
+<p><img src="https://mdg.imgix.net/assets/images/markdown-flowchart.png" alt="The Markdown Process"></p>
+<p>To summarize, this is a four-part process:</p>
+<ol>
+<li>Create a Markdown file using a text editor or a dedicated Markdown application. The file should have an <code>.md</code> or <code>.markdown</code> extension.</li>
+<li>Open the Markdown file in a Markdown application.</li>
+<li>Use the Markdown application to convert the Markdown file to an HTML document.</li>
+<li>View the HTML file in a web browser or use the Markdown application to convert it to another file format, like PDF.</li>
+</ol>
+<p>From your perspective, the process will vary somewhat depending on the application you use. For example, Dillinger essentially combines steps 1-3 into a single, seamless interface — all you have to do is type in the left pane and the rendered output magically appears in the right pane. But if you use other tools, like a text editor with a static website generator, you’ll find that the process is much more visible.</p>
+<!-- raw HTML omitted -->
+<ul class="pa0">
+  
+</ul>
+<div class="flex justify-between mt6">
+        
+        <a href="/posts/why-use-markdown/">Prev: Why Use Markdown?</a>
+        
+        
+        <a href="/posts/what-is-markdown-good-for/">Next: What’s Markdown Good For?</a>
+        
+      </div>
+      <div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  My New Hugo Site 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

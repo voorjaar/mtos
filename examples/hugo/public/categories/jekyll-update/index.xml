@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jekyll update on My New Hugo Site</title>
+    <link>http://example.org/categories/jekyll-update/</link>
+    <description>Recent content in jekyll update on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Oct 2022 11:44:21 +0800</lastBuildDate><atom:link href="http://example.org/categories/jekyll-update/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What’s Markdown Good For?</title>
+      <link>http://example.org/posts/what-is-markdown-good-for/</link>
+      <pubDate>Thu, 13 Oct 2022 11:44:21 +0800</pubDate>
+      
+      <guid>http://example.org/posts/what-is-markdown-good-for/</guid>
+      <description>Markdown is a fast and easy way to take notes, create content for a website, and produce print-ready documents.
+It doesn’t take long to learn the Markdown syntax, and once you know how to use it, you can write using Markdown just about everywhere. Most people use Markdown to create content for the web, but Markdown is good for formatting everything from email messages to grocery lists.
+Here are some examples of what you can do with Markdown.</description>
+    </item>
+    
+    <item>
+      <title>How Does it Work?</title>
+      <link>http://example.org/posts/how-does-it-work/</link>
+      <pubDate>Wed, 12 Oct 2022 11:44:21 +0800</pubDate>
+      
+      <guid>http://example.org/posts/how-does-it-work/</guid>
+      <description>Dillinger makes writing in Markdown easy because it hides the stuff happening behind the scenes, but it’s worth exploring how the process works in general.
+When you write in Markdown, the text is stored in a plaintext file that has an .md or .markdown extension. But then what? How is your Markdown-formatted file converted into HTML or a print-ready document?
+The short answer is that you need a Markdown application capable of processing the Markdown file.</description>
+    </item>
+    
+    <item>
+      <title>Why Use Markdown?</title>
+      <link>http://example.org/posts/why-use-markdown/</link>
+      <pubDate>Tue, 11 Oct 2022 11:44:21 +0800</pubDate>
+      
+      <guid>http://example.org/posts/why-use-markdown/</guid>
+      <description>You might be wondering why people use Markdown instead of a WYSIWYG editor. Why write with Markdown when you can press buttons in an interface to format your text? As it turns out, there are several reasons why people use Markdown instead of WYSIWYG editors.
+Markdown can be used for everything. People use it to create websites, documents, notes, books, presentations, email messages, and technical documentation. Markdown is portable. Files containing Markdown-formatted text can be opened using virtually any application.</description>
+    </item>
+    
+    <item>
+      <title>What is Markdown?</title>
+      <link>http://example.org/posts/what-is-markdown/</link>
+      <pubDate>Mon, 10 Oct 2022 11:44:21 +0800</pubDate>
+      
+      <guid>http://example.org/posts/what-is-markdown/</guid>
+      <description>Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. Created by John Gruber in 2004, Markdown is now one of the world’s most popular markup languages.
+Using Markdown is different than using a WYSIWYG editor. In an application like Microsoft Word, you click buttons to format words and phrases, and the changes are visible immediately. Markdown isn’t like that. When you create a Markdown-formatted file, you add Markdown syntax to the text to indicate which words and phrases should look different.</description>
+    </item>
+    
+  </channel>
+</rss>
