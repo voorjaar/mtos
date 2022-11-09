@@ -23,24 +23,6 @@
   }
 }
 
-@-webkit-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -48,7 +30,19 @@
 
 .progress-bar {
   height: 5px;
-  background-color: #1AA4F4;
+  background-color: #1aa4f4;
   position: fixed;
   z-index: 50;
+}
+
+.row {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+a.disabled {
+  pointer-events: none;
+  color: gray;
 }
