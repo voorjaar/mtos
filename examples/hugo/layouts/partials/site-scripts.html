@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.0/dist/mtos-iife.min.js"></script>
+
+<script>
+  function updateProgress(/** @type {number} */ n) {
+    const bar = document.querySelector(".progress-bar");
+    if (!bar) return;
+    bar.style.width = n + "%";
+  }
+
+  mtos.setup({
+    onBeforeElUpdated(fromEl, toEl) {
+      if (toEl.tagName === "MAIN") {
+        toEl.classList.add("animated", "fadeIn");
+      }
+    },
+    onElUpdated(el) {
+      if (el.tagName === "MAIN") {
+        setTimeout(() => {
+          el.classList.remove("animated", "fadeIn");
+        }, 250);
+      }
+    },
+    onFetchStart() {
+      updateProgress(0);
+    },
+    onFetchEnd() {
+      updateProgress(60);
+    },
+    onBeforePageRendered() {
+      updateProgress(80);
+    },
+    onPageRendered() {
+      updateProgress(100);
+    },
+  });
+</script>
