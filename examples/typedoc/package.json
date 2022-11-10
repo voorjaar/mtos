@@ -1,0 +1,27 @@
+{
+  "name": "typedoc-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "An example of using the TypeDoc documentation generator.",
+  "license": "Apache-2.0",
+  "author": "TypeDoc contributors",
+  "scripts": {
+    "lint": "eslint .",
+    "tsc": "tsc",
+    "typedoc": "typedoc --plugin typedoc-plugin-mtos --customCss assets/custom.css --customJs assets/custom.js"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.177",
+    "@types/node": "^18.11.9",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typedoc": "^0.23.20"
+  },
+  "devDependencies": {
+    "typedoc-plugin-mtos": "^0.7.4",
+    "typescript": "^4.5.2"
+  }
+}

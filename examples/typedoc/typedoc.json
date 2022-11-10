@@ -1,0 +1,22 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
+  "sort": ["source-order"],
+  "media": "media",
+  "categorizeByGroup": false,
+  "searchCategoryBoosts": {
+    "Component": 2,
+    "Model": 1.2
+  },
+  "searchGroupBoosts": {
+    "Classes": 1.5
+  },
+  "navigationLinks": {
+    "Docs": "https://typedoc.org/guides/overview",
+    "GitHub": "https://github.com/TypeStrong/typedoc"
+  },
+  "sidebarLinks": {
+    "API": "https://typedoc.org/api"
+  },
+  "plugin": ["typedoc-plugin-mtos"]
+}
