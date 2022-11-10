@@ -1,12 +1,13 @@
 {
   "name": "mtos",
   "type": "module",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Gives MPA a SPA-like user experience with no refreshing and incremenal loading.",
   "main": "dist/mtos.js",
   "module": "dist/mtos.mjs",
   "jsnext:main": "dist/mtos-esm.js",
   "types": "dist/mtos.d.ts",
+  "homepage": "https://github.com/voorjaar/mtos",
   "scripts": {
     "demo": "node ./demo/bin/www",
     "dev": "rollup -cw",
@@ -25,6 +26,13 @@
       "import": "./dist/mtos.mjs",
       "require": "./dist/mtos.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/voorjaar/mtos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voorjaar/mtos/issues"
   },
   "author": "Raven Satir",
   "license": "MIT",

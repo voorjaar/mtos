@@ -24,11 +24,12 @@ const defaultConfig = {
 };
 
 var config: ResolvedConfig = defaultConfig;
+var currentLocation = window.location.href;
 
 export function check({ href, target, host }: HTMLAnchorElement) {
   return (
     host === window.location.host &&
-    href.split("#")[0] !== window.location.href.split("#")[0] &&
+    href.split("#")[0] !== currentLocation.split("#")[0] &&
     (target === "" || target === "_self")
   );
 }
@@ -45,6 +46,8 @@ export function goto(href: string, options: GotoOptions = {}) {
     .then((html) => {
       const box = document.createElement("html");
       box.innerHTML = config.onFetchEnd?.(html, href) || html;
+
+      currentLocation = href;
 
       if (options.pushState !== false) {
         scrollPositions.push({
@@ -97,12 +100,15 @@ export function mtos() {
 window.addEventListener("load", mtos);
 
 window.addEventListener("popstate", () => {
-  goto(document.location.href, {
-    pushState: false,
-    scroll: {
-      enable: true,
-      behavior: "auto",
-      ...(scrollPositions.pop() || { top: 0, left: 0 }),
-    },
-  });
+  const a = document.createElement("a");
+  a.href = window.location.href;
+  if (config.onMatch!(a))
+    goto(document.location.href, {
+      pushState: false,
+      scroll: {
+        enable: true,
+        behavior: "auto",
+        ...(scrollPositions.pop() || { top: 0, left: 0 }),
+      },
+    });
 });
