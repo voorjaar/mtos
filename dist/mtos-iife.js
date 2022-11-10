@@ -776,6 +776,12 @@ var mtos = (function (exports) {
   function setup(userConfig) {
       config = Object.assign(Object.assign({}, defaultConfig), userConfig);
   }
+  function getScrollPosition() {
+      if (window.pageYOffset != null)
+          return { left: window.pageXOffset, top: window.pageYOffset };
+      const d = document, r = d.documentElement, b = d.body;
+      return { left: r.scrollLeft || b.scrollLeft || 0, top: r.scrollTop || b.scrollTop || 0 };
+  }
   function goto(href, options = {}) {
       var _a;
       if (((_a = config.onFetchStart) === null || _a === void 0 ? void 0 : _a.call(config, href)) === false)
@@ -788,10 +794,7 @@ var mtos = (function (exports) {
           box.innerHTML = ((_a = config.onFetchEnd) === null || _a === void 0 ? void 0 : _a.call(config, html, href)) || html;
           currentLocation = href;
           if (options.pushState !== false) {
-              scrollPositions.push({
-                  top: document.body.scrollTop,
-                  left: document.body.scrollLeft,
-              });
+              scrollPositions.push(getScrollPosition());
               history.pushState({}, ((_b = document.head.querySelector("title")) === null || _b === void 0 ? void 0 : _b.innerText) || "Document", href);
           }
           (_c = config.onBeforePageRendered) === null || _c === void 0 ? void 0 : _c.call(config, href);
