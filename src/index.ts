@@ -38,6 +38,12 @@ export function setup(userConfig: Config) {
   config = { ...defaultConfig, ...userConfig };
 }
 
+function getScrollPosition() {
+  if (window.pageYOffset != null) return { left: window.pageXOffset, top: window.pageYOffset };
+  const d = document, r = d.documentElement, b = d.body;
+  return { left: r.scrollLeft || b.scrollLeft || 0, top: r.scrollTop || b.scrollTop || 0 };
+}
+
 export function goto(href: string, options: GotoOptions = {}) {
   if (config.onFetchStart?.(href) === false) return;
 
@@ -50,10 +56,7 @@ export function goto(href: string, options: GotoOptions = {}) {
       currentLocation = href;
 
       if (options.pushState !== false) {
-        scrollPositions.push({
-          top: document.body.scrollTop,
-          left: document.body.scrollLeft,
-        });
+        scrollPositions.push(getScrollPosition());
 
         history.pushState(
           {},
