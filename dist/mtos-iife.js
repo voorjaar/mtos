@@ -767,9 +767,10 @@ var mtos = (function (exports) {
       scroll: defaultScrollOptions,
   };
   var config = defaultConfig;
+  var currentLocation = window.location.href;
   function check({ href, target, host }) {
       return (host === window.location.host &&
-          href.split("#")[0] !== window.location.href.split("#")[0] &&
+          href.split("#")[0] !== currentLocation.split("#")[0] &&
           (target === "" || target === "_self"));
   }
   function setup(userConfig) {
@@ -785,6 +786,7 @@ var mtos = (function (exports) {
           var _a, _b, _c, _d;
           const box = document.createElement("html");
           box.innerHTML = ((_a = config.onFetchEnd) === null || _a === void 0 ? void 0 : _a.call(config, html, href)) || html;
+          currentLocation = href;
           if (options.pushState !== false) {
               scrollPositions.push({
                   top: document.body.scrollTop,
@@ -821,10 +823,13 @@ var mtos = (function (exports) {
   }
   window.addEventListener("load", mtos);
   window.addEventListener("popstate", () => {
-      goto(document.location.href, {
-          pushState: false,
-          scroll: Object.assign({ enable: true, behavior: "auto" }, (scrollPositions.pop() || { top: 0, left: 0 })),
-      });
+      const a = document.createElement("a");
+      a.href = window.location.href;
+      if (config.onMatch(a))
+          goto(document.location.href, {
+              pushState: false,
+              scroll: Object.assign({ enable: true, behavior: "auto" }, (scrollPositions.pop() || { top: 0, left: 0 })),
+          });
   });
 
   exports.check = check;
