@@ -21,13 +21,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.2/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.2/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -35,7 +35,7 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.7.2/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-esm.js"
 ></script>
 ```
 
@@ -56,9 +56,9 @@ You can also download the script using npm.
 
 ```sh
 npm pack mtos
-tar -xzf mtos-0.7.2.tgz
+tar -xzf mtos-0.7.3.tgz
 mv package/dist/mtos-iife.min.js .
-rm -r mtos-0.7.2.tgz package
+rm -r mtos-0.7.3.tgz package
 ```
 
 ## API

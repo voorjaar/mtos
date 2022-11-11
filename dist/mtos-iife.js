@@ -780,7 +780,10 @@ var mtos = (function (exports) {
       if (window.pageYOffset != null)
           return { left: window.pageXOffset, top: window.pageYOffset };
       const d = document, r = d.documentElement, b = d.body;
-      return { left: r.scrollLeft || b.scrollLeft || 0, top: r.scrollTop || b.scrollTop || 0 };
+      return {
+          left: r.scrollLeft || b.scrollLeft || 0,
+          top: r.scrollTop || b.scrollTop || 0,
+      };
   }
   function goto(href, options = {}) {
       var _a;

@@ -46,4 +46,4 @@ declare function setup(userConfig: Config): void;
 declare function goto(href: string, options?: GotoOptions): false | undefined;
 declare function mtos(): void;
 
-export { check, goto, mtos, setup };
+export { Config, GotoOptions, Hooks, ResolvedConfig, ScrollOptions, check, goto, mtos, setup };
