@@ -39,9 +39,15 @@ export function setup(userConfig: Config) {
 }
 
 function getScrollPosition() {
-  if (window.pageYOffset != null) return { left: window.pageXOffset, top: window.pageYOffset };
-  const d = document, r = d.documentElement, b = d.body;
-  return { left: r.scrollLeft || b.scrollLeft || 0, top: r.scrollTop || b.scrollTop || 0 };
+  if (window.pageYOffset != null)
+    return { left: window.pageXOffset, top: window.pageYOffset };
+  const d = document,
+    r = d.documentElement,
+    b = d.body;
+  return {
+    left: r.scrollLeft || b.scrollLeft || 0,
+    top: r.scrollTop || b.scrollTop || 0,
+  };
 }
 
 export function goto(href: string, options: GotoOptions = {}) {
@@ -99,6 +105,8 @@ export function mtos() {
       };
   });
 }
+
+export * from "./types";
 
 window.addEventListener("load", mtos);
 
