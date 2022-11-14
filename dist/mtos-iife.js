@@ -755,27 +755,15 @@ var mtos = (function (exports) {
 
   var morphdom = morphdomFactory(morphAttrs);
 
-  const defaultScrollOptions = {
-      enable: true,
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-  };
-  const scrollPositions = [];
-  const defaultConfig = {
-      onMatch: check,
-      scroll: defaultScrollOptions,
-  };
-  var config = defaultConfig;
-  var currentLocation = window.location.href;
-  function check({ href, target, host }) {
-      return (host === window.location.host &&
-          href.split("#")[0] !== currentLocation.split("#")[0] &&
-          (target === "" || target === "_self"));
+  /** load dynamic script */
+  function copyScript(fromEl, toEl) {
+      const script = document.createElement("script");
+      [...toEl.attributes].forEach((attr) => script.setAttribute(attr.nodeName, attr.nodeValue));
+      script.innerHTML = toEl.innerHTML;
+      fromEl.replaceWith(script);
+      return script;
   }
-  function setup(userConfig) {
-      config = Object.assign(Object.assign({}, defaultConfig), userConfig);
-  }
+  /** get page scroll position */
   function getScrollPosition() {
       if (window.pageYOffset != null)
           return { left: window.pageXOffset, top: window.pageYOffset };
@@ -784,6 +772,38 @@ var mtos = (function (exports) {
           left: r.scrollLeft || b.scrollLeft || 0,
           top: r.scrollTop || b.scrollTop || 0,
       };
+  }
+  function resolveScrollOptions(options, config) {
+      return Object.assign(Object.assign({ enable: true, top: 0, left: 0, behavior: "smooth" }, config), options);
+  }
+
+  const scrollPositions = [];
+  var config = resolveConfig();
+  var currentLocation = window.location.href;
+  function check({ href, target, host }) {
+      return (host === window.location.host &&
+          href.split("#")[0] !== currentLocation.split("#")[0] &&
+          (target === "" || target === "_self"));
+  }
+  function resolveConfig(userConfig = {}) {
+      return Object.assign(Object.assign({}, userConfig), { onMatch: userConfig.onMatch || check, scroll: resolveScrollOptions(userConfig.scroll), onNodeAdded(node) {
+              var _a;
+              if (userConfig.eval && node.nodeName === "SCRIPT")
+                  node = copyScript(node, node);
+              return ((_a = userConfig.onNodeAdded) === null || _a === void 0 ? void 0 : _a.call(userConfig, node)) || node;
+          },
+          onBeforeElUpdated(fromEl, toEl) {
+              var _a;
+              return userConfig.eval &&
+                  fromEl.nodeName === "SCRIPT" &&
+                  toEl.nodeName === "SCRIPT"
+                  ? copyScript(fromEl, toEl) &&
+                      false
+                  : ((_a = userConfig.onBeforeElUpdated) === null || _a === void 0 ? void 0 : _a.call(userConfig, fromEl, toEl)) || true;
+          } });
+  }
+  function setup(userConfig) {
+      config = resolveConfig(userConfig);
   }
   function goto(href, options = {}) {
       var _a;
@@ -803,11 +823,11 @@ var mtos = (function (exports) {
           (_c = config.onBeforePageRendered) === null || _c === void 0 ? void 0 : _c.call(config, href);
           const head = box.querySelector("head");
           const body = box.querySelector("body");
-          head && morphdom(document.head, head);
+          head && morphdom(document.head, head, config);
           body && morphdom(document.body, body, config);
           (_d = config.onPageRendered) === null || _d === void 0 ? void 0 : _d.call(config, href);
-          const scrollOptions = options.scroll || config.scroll;
-          (scrollOptions === null || scrollOptions === void 0 ? void 0 : scrollOptions.enable) && window.scrollTo(scrollOptions);
+          const scrollOptions = resolveScrollOptions(options.scroll, config.scroll);
+          scrollOptions.enable && window.scrollTo(scrollOptions);
           mtos();
       })
           .catch((e) => { var _a; return (_a = config.onFetchError) === null || _a === void 0 ? void 0 : _a.call(config, e, href); });
@@ -834,13 +854,14 @@ var mtos = (function (exports) {
       if (config.onMatch(a))
           goto(document.location.href, {
               pushState: false,
-              scroll: Object.assign({ enable: true, behavior: "auto" }, (scrollPositions.pop() || { top: 0, left: 0 })),
+              scroll: resolveScrollOptions(Object.assign({ behavior: "auto" }, scrollPositions.pop())),
           });
   });
 
   exports.check = check;
   exports.goto = goto;
   exports.mtos = mtos;
+  exports.resolveConfig = resolveConfig;
   exports.setup = setup;
 
   return exports;

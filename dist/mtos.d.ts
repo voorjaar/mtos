@@ -31,19 +31,22 @@ interface Hooks {
 declare type ScrollOptions = {
     enable?: boolean;
 } & ScrollToOptions;
+declare type ResolvedScrollOptions = Required<ScrollOptions>;
 declare type GotoOptions = {
     pushState?: boolean;
     scroll?: ScrollOptions;
 };
 declare type ResolvedConfig = Hooks & {
     fetch?: RequestInit;
-    scroll: ScrollOptions;
+    scroll: ResolvedScrollOptions;
+    eval?: boolean;
 };
 declare type Config = Partial<ResolvedConfig>;
 
 declare function check({ href, target, host }: HTMLAnchorElement): boolean;
-declare function setup(userConfig: Config): void;
+declare function resolveConfig(userConfig?: Config): ResolvedConfig;
+declare function setup(userConfig?: Config): void;
 declare function goto(href: string, options?: GotoOptions): false | undefined;
 declare function mtos(): void;
 
-export { Config, GotoOptions, Hooks, ResolvedConfig, ScrollOptions, check, goto, mtos, setup };
+export { Config, GotoOptions, Hooks, ResolvedConfig, ResolvedScrollOptions, ScrollOptions, check, goto, mtos, resolveConfig, setup };
