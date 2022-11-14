@@ -20,6 +20,7 @@ export function check({ href, target, host }: HTMLAnchorElement) {
 
 export function resolveConfig(userConfig: Config = {}): ResolvedConfig {
   return {
+    ...userConfig,
     onMatch: userConfig.onMatch || check,
     scroll: resolveScrollOptions(userConfig.scroll),
     onNodeAdded(node: Node) {
@@ -36,7 +37,7 @@ export function resolveConfig(userConfig: Config = {}): ResolvedConfig {
   };
 }
 
-export function setup(userConfig: Config = {}) {
+export function setup(userConfig?: Config) {
   config = resolveConfig(userConfig);
 }
 
