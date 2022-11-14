@@ -34,6 +34,8 @@ export interface Hooks {
 
 export type ScrollOptions = { enable?: boolean } & ScrollToOptions;
 
+export type ResolvedScrollOptions = Required<ScrollOptions>;
+
 export type GotoOptions = {
   pushState?: boolean;
   scroll?: ScrollOptions;
@@ -41,7 +43,7 @@ export type GotoOptions = {
 
 export type ResolvedConfig = Hooks & {
   fetch?: RequestInit;
-  scroll: ScrollOptions;
+  scroll: ResolvedScrollOptions;
 };
 
 export type Config = Partial<ResolvedConfig>;
