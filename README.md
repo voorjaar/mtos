@@ -21,13 +21,13 @@ npm install --save-dev mtos
 #### IIFE
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.8.0/dist/mtos-iife.min.js"></script>
 ```
 
 #### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mtos@0.8.0/dist/mtos-umd.min.js"></script>
 ```
 
 #### ESM
@@ -35,7 +35,7 @@ npm install --save-dev mtos
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/mtos@0.7.3/dist/mtos-esm.js"
+  src="https://cdn.jsdelivr.net/npm/mtos@0.8.0/dist/mtos-esm.js"
 ></script>
 ```
 
@@ -56,9 +56,9 @@ You can also download the script using npm.
 
 ```sh
 npm pack mtos
-tar -xzf mtos-0.7.3.tgz
+tar -xzf mtos-0.8.0.tgz
 mv package/dist/mtos-iife.min.js .
-rm -r mtos-0.7.3.tgz package
+rm -r mtos-0.8.0.tgz package
 ```
 
 ## API
@@ -103,6 +103,9 @@ Setup [mtos](https://www.npmjs.com/package/mtos) with user configuration.
 
 ```typescript
 interface Config {
+  /** Eval Script Element When Update, Default is false */
+  eval?: boolean;
+
   /** Fetch Options */
   fetch?: RequestInit;
 
@@ -240,7 +243,7 @@ Mtos works similar to SPA, but is based on native dom. The workflow like this:
 
 ## TODOs
 
-- fix: eval script block
+- ~~fix: eval script block~~
 - feat: support diff root elements that not head and body
 - feat: cache page when hover link (optional)
 - feat: support update part of elements, like htmx
