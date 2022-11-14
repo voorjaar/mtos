@@ -1,29 +1,13 @@
 import morphdom from "morphdom";
-import type {
-  Config,
-  ResolvedConfig,
-  ScrollOptions,
-  GotoOptions,
-} from "./types";
-
-const defaultScrollOptions: ScrollOptions = {
-  enable: true,
-  top: 0,
-  left: 0,
-  behavior: "smooth",
-};
+import { copyScript, getScrollPosition, resolveScrollOptions } from "./utils";
+import type { Config, ResolvedConfig, GotoOptions } from "./types";
 
 const scrollPositions: {
   top: number;
   left: number;
 }[] = [];
 
-const defaultConfig = {
-  onMatch: check,
-  scroll: defaultScrollOptions,
-};
-
-var config: ResolvedConfig = defaultConfig;
+var config: ResolvedConfig = resolveConfig();
 var currentLocation = window.location.href;
 
 export function check({ href, target, host }: HTMLAnchorElement) {
@@ -34,20 +18,26 @@ export function check({ href, target, host }: HTMLAnchorElement) {
   );
 }
 
-export function setup(userConfig: Config = {}) {
-  config = { ...defaultConfig, ...userConfig };
+export function resolveConfig(userConfig: Config = {}): ResolvedConfig {
+  return {
+    onMatch: userConfig.onMatch || check,
+    scroll: resolveScrollOptions(userConfig.scroll),
+    onNodeAdded(node: Node) {
+      if (node.nodeName === "SCRIPT")
+        node = copyScript(node as HTMLScriptElement, node as HTMLScriptElement);
+      return userConfig.onNodeAdded?.(node) || node;
+    },
+    onBeforeElUpdated(fromEl: HTMLElement, toEl: HTMLElement) {
+      return fromEl.nodeName === "SCRIPT" && toEl.nodeName === "SCRIPT"
+        ? copyScript(fromEl as HTMLScriptElement, toEl as HTMLScriptElement) &&
+            false
+        : userConfig.onBeforeElUpdated?.(fromEl, toEl) || true;
+    },
+  };
 }
 
-function getScrollPosition() {
-  if (window.pageYOffset != null)
-    return { left: window.pageXOffset, top: window.pageYOffset };
-  const d = document,
-    r = d.documentElement,
-    b = d.body;
-  return {
-    left: r.scrollLeft || b.scrollLeft || 0,
-    top: r.scrollTop || b.scrollTop || 0,
-  };
+export function setup(userConfig: Config = {}) {
+  config = resolveConfig(userConfig);
 }
 
 export function goto(href: string, options: GotoOptions = {}) {
@@ -76,13 +66,13 @@ export function goto(href: string, options: GotoOptions = {}) {
       const head = box.querySelector("head");
       const body = box.querySelector("body");
 
-      head && morphdom(document.head, head);
+      head && morphdom(document.head, head, config);
       body && morphdom(document.body, body, config);
 
       config.onPageRendered?.(href);
 
-      const scrollOptions = options.scroll || config.scroll;
-      scrollOptions?.enable && window.scrollTo(scrollOptions);
+      const scrollOptions = resolveScrollOptions(options.scroll, config.scroll);
+      scrollOptions.enable && window.scrollTo(scrollOptions);
 
       mtos();
     })
@@ -116,10 +106,9 @@ window.addEventListener("popstate", () => {
   if (config.onMatch!(a))
     goto(document.location.href, {
       pushState: false,
-      scroll: {
-        enable: true,
+      scroll: resolveScrollOptions({
         behavior: "auto",
-        ...(scrollPositions.pop() || { top: 0, left: 0 }),
-      },
+        ...scrollPositions.pop(),
+      }),
     });
 });
