@@ -34,7 +34,7 @@ export function check({ href, target, host }: HTMLAnchorElement) {
   );
 }
 
-export function setup(userConfig: Config) {
+export function setup(userConfig: Config = {}) {
   config = { ...defaultConfig, ...userConfig };
 }
 
