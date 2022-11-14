@@ -44,6 +44,7 @@ export type GotoOptions = {
 export type ResolvedConfig = Hooks & {
   fetch?: RequestInit;
   scroll: ResolvedScrollOptions;
+  eval?: boolean;
 };
 
 export type Config = Partial<ResolvedConfig>;

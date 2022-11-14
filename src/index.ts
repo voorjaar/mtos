@@ -24,12 +24,14 @@ export function resolveConfig(userConfig: Config = {}): ResolvedConfig {
     onMatch: userConfig.onMatch || check,
     scroll: resolveScrollOptions(userConfig.scroll),
     onNodeAdded(node: Node) {
-      if (node.nodeName === "SCRIPT")
+      if (userConfig.eval && node.nodeName === "SCRIPT")
         node = copyScript(node as HTMLScriptElement, node as HTMLScriptElement);
       return userConfig.onNodeAdded?.(node) || node;
     },
     onBeforeElUpdated(fromEl: HTMLElement, toEl: HTMLElement) {
-      return fromEl.nodeName === "SCRIPT" && toEl.nodeName === "SCRIPT"
+      return userConfig.eval &&
+        fromEl.nodeName === "SCRIPT" &&
+        toEl.nodeName === "SCRIPT"
         ? copyScript(fromEl as HTMLScriptElement, toEl as HTMLScriptElement) &&
             false
         : userConfig.onBeforeElUpdated?.(fromEl, toEl) || true;
